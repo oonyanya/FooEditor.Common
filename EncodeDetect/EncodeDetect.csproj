@@ -90,7 +90,6 @@
   <ItemGroup>
     <Compile Include="DectingEncode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SimpleHelpers\FileEncoding.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
