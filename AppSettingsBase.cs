@@ -538,6 +538,7 @@ namespace FooEditor
             set
             {
                 this._DocumentType = value;
+                this.OnPropertyChanged();
             }
         }
 
