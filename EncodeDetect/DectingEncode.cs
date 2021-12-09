@@ -112,7 +112,7 @@ namespace EncodeDetect
         /// <returns>Encodingオブジェクト返却する。判定できないときはnullが返る</returns>
         public static async Task<Encoding> GetEncodingAsync(Stream stream)
         {
-            const int maxReadCount = 16384;
+            const int maxReadCount = 65535;
             byte[] bs = new byte[maxReadCount];
             await stream.ReadAsync(bs, 0, maxReadCount);
             return EncodeDetect.DectingEncode.GetCode(bs);
