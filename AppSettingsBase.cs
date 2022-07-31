@@ -6,10 +6,14 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.Reflection;
 using FooEditEngine;
+using CommunityToolkit.Mvvm.Messaging;
+#if WINUI
+using CommunityToolkit.WinUI.Helpers;
+#endif
 
 namespace FooEditor
 {
-    public class AppSettingsBase: INotifyPropertyChanged
+    public class AppSettingsBase : INotifyPropertyChanged
     {
         protected ObservableCollection<FileType> _FileTypeCollection;
 
@@ -378,7 +382,7 @@ namespace FooEditor
         {
             get
             {
-                if(_DefaultEncoding == null)
+                if (_DefaultEncoding == null)
                 {
                     var webname = (string)GetEditorProperty("DefaultEncoding");
                     _DefaultEncoding = EncodeDetect.DectingEncode.GetEncodingFromWebName(webname);
@@ -393,6 +397,177 @@ namespace FooEditor
             }
         }
 
+        Windows.UI.Color? _ForegroundColor;
+        public Windows.UI.Color ForegroundColor
+        {
+            get
+            {
+                if (_ForegroundColor == null)
+                {
+                    var colorcode = (string)GetEditorProperty("ForegroundColor");
+                    _ForegroundColor = ColorHelper.ToColor(colorcode);
+                }
+                return _ForegroundColor.Value;
+            }
+            set
+            {
+                SetEditorProperty("ForegroundColor", value.ToHex());
+                this.OnChangedSetting();
+            }
+        }
+
+        Windows.UI.Color? _KeywordColor;
+        public Windows.UI.Color KeywordColor
+        {
+            get
+            {
+                if(_KeywordColor == null)
+                {
+                    var colorcode = (string)GetEditorProperty("KeywordColor");
+                    _KeywordColor = ColorHelper.ToColor(colorcode);
+                }
+                return _KeywordColor.Value;
+            }
+            set
+            {
+                SetEditorProperty("KeywordColor", value.ToHex());
+                this.OnChangedSetting();
+            }
+        }
+
+        Windows.UI.Color? _Keyword2Color;
+        public Windows.UI.Color Keyword2Color
+        {
+            get
+            {
+                if (_Keyword2Color == null)
+                {
+                    var colorcode = (string)GetEditorProperty("Keyword2Color");
+                    _Keyword2Color = ColorHelper.ToColor(colorcode);
+                }
+                return _Keyword2Color.Value;
+            }
+            set
+            {
+                SetEditorProperty("Keyword2Color", value.ToHex());
+                this.OnChangedSetting();
+            }
+        }
+
+        Windows.UI.Color? _URLColor;
+        public Windows.UI.Color URLColor
+        {
+            get
+            {
+                if (_URLColor == null)
+                {
+                    var colorcode = (string)GetEditorProperty("URLColor");
+                    _URLColor = ColorHelper.ToColor(colorcode);
+                }
+                return _URLColor.Value;
+            }
+            set
+            {
+                SetEditorProperty("URLColor", value.ToHex());
+                this.OnChangedSetting();
+            }
+        }
+
+        Windows.UI.Color? _ControlCharColor;
+        public Windows.UI.Color ControlCharColor
+        {
+            get
+            {
+                if (_ControlCharColor == null)
+                {
+                    var colorcode = (string)GetEditorProperty("ControlCharColor");
+                    _ControlCharColor = ColorHelper.ToColor(colorcode);
+                }
+                return _ControlCharColor.Value;
+            }
+            set
+            {
+                SetEditorProperty("ControlCharColor", value.ToHex());
+                this.OnChangedSetting();
+            }
+        }
+
+        Windows.UI.Color? _CommentColor;
+        public Windows.UI.Color CommentColor
+        {
+            get
+            {
+                if (_CommentColor == null)
+                {
+                    var colorcode = (string)GetEditorProperty("CommentColor");
+                    _CommentColor = ColorHelper.ToColor(colorcode);
+                }
+                return _CommentColor.Value;
+            }
+            set
+            {
+                SetEditorProperty("CommentColor", value.ToHex());
+                this.OnChangedSetting();
+            }
+        }
+
+        Windows.UI.Color? _LiteralColor;
+        public Windows.UI.Color LiteralColor
+        {
+            get
+            {
+                if (_LiteralColor == null)
+                {
+                    var colorcode = (string)GetEditorProperty("LiteralColor");
+                    _LiteralColor = ColorHelper.ToColor(colorcode);
+                }
+                return _LiteralColor.Value;
+            }
+            set
+            {
+                SetEditorProperty("LiteralColor", value.ToHex());
+                this.OnChangedSetting();
+            }
+        }
+
+        Windows.UI.Color? _UpdateAreaColor;
+        public Windows.UI.Color UpdateAreaColor
+        {
+            get
+            {
+                if (_UpdateAreaColor == null)
+                {
+                    var colorcode = (string)GetEditorProperty("UpdateAreaColor");
+                    _UpdateAreaColor = ColorHelper.ToColor(colorcode);
+                }
+                return _UpdateAreaColor.Value;
+            }
+            set
+            {
+                SetEditorProperty("UpdateAreaColor", value.ToHex());
+                this.OnChangedSetting();
+            }
+        }
+
+        Windows.UI.Color? _LineMarkerColor;
+        public Windows.UI.Color LineMarkerColor
+        {
+            get
+            {
+                if (_LineMarkerColor == null)
+                {
+                    var colorcode = (string)GetEditorProperty("LineMarkerColor");
+                    _LineMarkerColor = ColorHelper.ToColor(colorcode);
+                }
+                return _LineMarkerColor.Value;
+            }
+            set
+            {
+                SetEditorProperty("LineMarkerColor", value.ToHex());
+                this.OnChangedSetting();
+            }
+        }
+
         protected virtual object GetGlobalEditorProperty(string name)
         {
             return null;
@@ -401,6 +576,7 @@ namespace FooEditor
         protected virtual void SetGlobalEditorProperty(string name, object value)
         {
         }
+
 
         private object GetEditorProperty(string name)
         {
@@ -456,8 +632,10 @@ namespace FooEditor
         {
             if (ChangedSetting != null)
                 ChangedSetting(this, null);
+            var propertyChangedArgs = new PropertyChangedEventArgs(caller);
             if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(caller));
+                PropertyChanged(this, propertyChangedArgs);
+            WeakReferenceMessenger.Default.Send(propertyChangedArgs);
         }
 
         public event EventHandler ChangedSetting;
