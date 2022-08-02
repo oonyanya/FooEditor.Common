@@ -9,6 +9,8 @@ using FooEditEngine;
 using CommunityToolkit.Mvvm.Messaging;
 #if WINUI
 using CommunityToolkit.WinUI.Helpers;
+#elif WINDOWS_UWP
+using Microsoft.Toolkit.Uwp.Helpers;
 #endif
 
 namespace FooEditor
