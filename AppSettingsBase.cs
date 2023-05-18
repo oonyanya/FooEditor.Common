@@ -418,6 +418,25 @@ namespace FooEditor
             }
         }
 
+        Windows.UI.Color? _BackgroundColor;
+        public Windows.UI.Color BackgroundColor
+        {
+            get
+            {
+                if (_BackgroundColor == null)
+                {
+                    var colorcode = (string)GetEditorProperty("BackgroundColor");
+                    _BackgroundColor = ColorHelper.ToColor(colorcode);
+                }
+                return _BackgroundColor.Value;
+            }
+            set
+            {
+                SetEditorProperty("BackgroundColor", value.ToHex());
+                this.OnChangedSetting();
+            }
+        }
+
         Windows.UI.Color? _KeywordColor;
         public Windows.UI.Color KeywordColor
         {
