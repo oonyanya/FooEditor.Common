@@ -7,6 +7,8 @@ using System.Runtime.Serialization;
 using System.Reflection;
 using FooEditEngine;
 using CommunityToolkit.Mvvm.Messaging;
+using Microsoft.Graphics.Canvas.Effects;
+
 #if WINUI
 using CommunityToolkit.WinUI.Helpers;
 #elif WINDOWS_UWP
@@ -585,6 +587,18 @@ namespace FooEditor
             set
             {
                 SetEditorProperty("LineMarkerColor", value.ToHex());
+                this.OnChangedSetting();
+            }
+        }
+
+        public double LineEmHeight
+        {
+            get {
+                return (double)GetEditorProperty("LineEmHeight");
+            }
+            set
+            {
+                SetEditorProperty("LineEmHeight", value);
                 this.OnChangedSetting();
             }
         }
