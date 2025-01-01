@@ -416,6 +416,7 @@ namespace FooEditor
             set
             {
                 SetEditorProperty("ForegroundColor", value.ToHex());
+                _ForegroundColor = value;
                 this.OnChangedSetting();
             }
         }
@@ -435,6 +436,7 @@ namespace FooEditor
             set
             {
                 SetEditorProperty("BackgroundColor", value.ToHex());
+                _BackgroundColor = value;
                 this.OnChangedSetting();
             }
         }
@@ -454,6 +456,7 @@ namespace FooEditor
             set
             {
                 SetEditorProperty("KeywordColor", value.ToHex());
+                _KeywordColor = value;
                 this.OnChangedSetting();
             }
         }
@@ -473,6 +476,7 @@ namespace FooEditor
             set
             {
                 SetEditorProperty("Keyword2Color", value.ToHex());
+                _Keyword2Color = value;
                 this.OnChangedSetting();
             }
         }
@@ -492,6 +496,7 @@ namespace FooEditor
             set
             {
                 SetEditorProperty("URLColor", value.ToHex());
+                _URLColor = value;
                 this.OnChangedSetting();
             }
         }
@@ -511,6 +516,7 @@ namespace FooEditor
             set
             {
                 SetEditorProperty("ControlCharColor", value.ToHex());
+                _ControlCharColor = value;
                 this.OnChangedSetting();
             }
         }
@@ -530,6 +536,7 @@ namespace FooEditor
             set
             {
                 SetEditorProperty("CommentColor", value.ToHex());
+                _CommentColor = value;
                 this.OnChangedSetting();
             }
         }
@@ -549,6 +556,7 @@ namespace FooEditor
             set
             {
                 SetEditorProperty("LiteralColor", value.ToHex());
+                _LiteralColor = value;
                 this.OnChangedSetting();
             }
         }
@@ -568,6 +576,7 @@ namespace FooEditor
             set
             {
                 SetEditorProperty("UpdateAreaColor", value.ToHex());
+                _UpdateAreaColor = value;
                 this.OnChangedSetting();
             }
         }
@@ -587,6 +596,7 @@ namespace FooEditor
             set
             {
                 SetEditorProperty("LineMarkerColor", value.ToHex());
+                _LineMarkerColor = value;
                 this.OnChangedSetting();
             }
         }
