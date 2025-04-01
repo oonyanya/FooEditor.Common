@@ -48,6 +48,19 @@ namespace FooEditor
             await Task.Delay(1);
         }
 
+        public bool AllowMultiInstance
+        {
+            get
+            {
+                return (bool)GetEditorProperty("AllowMultiInstance");
+            }
+            set
+            {
+                SetEditorProperty("AllowMultiInstance", value);
+                this.OnChangedSetting();
+            }
+        }
+
         public bool IndentBySpace
         {
             get
