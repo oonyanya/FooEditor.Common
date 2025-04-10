@@ -1,1 +1,3 @@
 リポジトリ―を複製する際は「適当なフォルダー\Common」としてください
+
+なお、FooEditor.WPFやFooEditor.UWPをビルドする際はブランチをwpfに切り替えてください
