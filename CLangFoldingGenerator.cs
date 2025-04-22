@@ -9,9 +9,9 @@ namespace FooEditor
     {
         struct TextLevelInfo
         {
-            public int Index;
+            public long Index;
             public int Level;
-            public TextLevelInfo(int index, int level)
+            public TextLevelInfo(long index, int level)
             {
                 this.Index = index;
                 this.Level = level;
@@ -40,10 +40,10 @@ namespace FooEditor
             this.EndBracket = endbracket;
         }
 
-        public IEnumerable<FoldingItem> AnalyzeDocument(Document doc, int start, int end)
+        public IEnumerable<FoldingItem> AnalyzeDocument(Document doc, long start, long end)
         {
             Stack<TextLevelInfo> beginIndexs = new Stack<TextLevelInfo>();
-            int lineHeadIndex = start;
+            long lineHeadIndex = start;
             int level = 0;
             foreach (string lineStr in doc.GetLines(start, end))
             {
@@ -74,7 +74,7 @@ namespace FooEditor
                     if (m != null && m.Success)
                     {
                         beginIndexs.Pop();
-                        int endIndex = lineHeadIndex + m.Index + m.Length - 1;
+                        long endIndex = lineHeadIndex + m.Index + m.Length - 1;
                         if (begin.Index < endIndex)
                             yield return new OutlineItem(begin.Index, endIndex,level);
                     }

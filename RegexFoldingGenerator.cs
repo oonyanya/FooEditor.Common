@@ -10,7 +10,7 @@ namespace FooEditor
         /// <summary>
         /// コンストラクター
         /// </summary>
-        public OutlineItem(int start, int end, int level)
+        public OutlineItem(long start, long end, int level)
             : base(start, end)
         {
             this.Level = level;
@@ -46,11 +46,11 @@ namespace FooEditor
             }
         }
 
-        public IEnumerable<FoldingItem> AnalyzeDocument(Document doc, int start, int end)
+        public IEnumerable<FoldingItem> AnalyzeDocument(Document doc, long start, long end)
         {
-            Stack<int> beginIndexs = new Stack<int>();
+            Stack<long> beginIndexs = new Stack<long>();
             int level = 0;
-            int lineHeadIndex = start;
+            long lineHeadIndex = start;
             foreach (string lineStr in doc.GetLines(start, end))
             {
                 Match m = null;
@@ -68,8 +68,8 @@ namespace FooEditor
                 {
                     if (beginIndexs.Count == 0)
                         continue;
-                    int beginIndex = beginIndexs.Pop();
-                    int endIndex = lineHeadIndex + m.Index + m.Length - 1;
+                    long beginIndex = beginIndexs.Pop();
+                    long endIndex = lineHeadIndex + m.Index + m.Length - 1;
                     if (beginIndex < endIndex)
                         yield return new OutlineItem(beginIndex, endIndex,level);
                     level--;
