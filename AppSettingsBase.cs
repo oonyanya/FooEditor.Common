@@ -415,7 +415,11 @@ namespace FooEditor
                 if (_DefaultEncoding == null)
                 {
                     var webname = (string)GetEditorProperty("DefaultEncoding");
+#if WINUI
+                    _DefaultEncoding = DectingEncode.GetEncodingFromWebName(webname);
+#else
                     _DefaultEncoding = EncodeDetect.DectingEncode.GetEncodingFromWebName(webname);
+#endif
                 }
                 return _DefaultEncoding;
             }
