@@ -48,6 +48,19 @@ namespace FooEditor
             await Task.Delay(1);
         }
 
+        public string WorkfilePath
+        {
+            get
+            {
+                return (string)GetEditorProperty("WorkfilePath");
+            }
+            set
+            {
+                SetEditorProperty("WorkfilePath", value);
+                this.OnChangedSetting();
+            }
+        }
+
         public bool UseDocumentWithWorkfile
         {
             get
