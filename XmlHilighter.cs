@@ -4,7 +4,7 @@ using FooEditEngine;
 
 namespace FooEditor
 {
-    sealed class XmlHilighter : IHilighter
+    sealed class XmlHilighter : HilighterBase
     {
         private TextParserMode mode;
         private StringBuilder word;
@@ -18,14 +18,14 @@ namespace FooEditor
 
         #region IHilighter メンバー
 
-        public void Reset()
+        public override void Reset()
         {
             this.mode = TextParserMode.TextPart;
             this.KeyWordType = TokenType.None;
             this.word.Clear();
         }
 
-        public int DoHilight(string text, int length, TokenSpilitHandeler action)
+        public override int DoHilight(string text, int length, TokenSpilitHandeler action)
         {
             int encloserLevel = 0;
             int i,wordPos = 0;

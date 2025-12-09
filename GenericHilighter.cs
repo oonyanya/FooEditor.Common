@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Collections.Generic;
 using FooEditEngine;
+using FooEditor.WinUI.Models;
 
 namespace FooEditor
 {
@@ -19,7 +20,7 @@ namespace FooEditor
     /// <summary>
     /// トークンに分けるためのクラス
     /// </summary>
-    sealed class GenericHilighter : IHilighter
+    sealed class GenericHilighter : HilighterBase
     {
         private SyntaxDefnition km;
         private StringBuilder token;
@@ -58,13 +59,13 @@ namespace FooEditor
         }
 
 
-        public void Reset()
+        public override void Reset()
         {
             this.word.Remove(0, word.Length);
             this.mode = TextParserMode.ScriptPart;
         }
 
-        public int DoHilight(string text, int length, TokenSpilitHandeler action)
+        public override int DoHilight(string text, int length, TokenSpilitHandeler action)
         {
             int encloserLevel = 0;
 
@@ -123,7 +124,7 @@ namespace FooEditor
                         this.mode = TranstionTable[i].to;
                         encloserLevel--;
                     }
-                    if (this.mode == TextParserMode.SingleLineComment && text[cur] == Document.NewLine)
+                    if (this.mode == TextParserMode.SingleLineComment && FooEditEngine.Util.IsHasNewLine(text))
                     {
                         this.mode = TextParserMode.ScriptPart;
                         encloserLevel--;
