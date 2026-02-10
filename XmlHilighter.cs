@@ -4,7 +4,7 @@ using FooEditEngine;
 
 namespace FooEditor
 {
-    sealed class XmlHilighter : HilighterBase
+    sealed class XmlHilighter : HilighterLegacyBase
     {
         private TextParserMode mode;
         private StringBuilder word;

@@ -20,7 +20,7 @@ namespace FooEditor
     /// <summary>
     /// トークンに分けるためのクラス
     /// </summary>
-    sealed class GenericHilighter : HilighterBase
+    sealed class GenericHilighter : HilighterLegacyBase
     {
         private SyntaxDefnition km;
         private StringBuilder token;
